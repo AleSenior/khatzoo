@@ -1,4 +1,4 @@
-import { users } from '../../static/dataSource'; // Más adelante se usará una conexión a una base de datos
+import { users } from '$lib/dataSource'; // Más adelante se usará una conexión a una base de datos
 import { redirect } from '@sveltejs/kit';
 
 export function load({ cookies }) {

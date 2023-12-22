@@ -1,15 +1,14 @@
 <script lang="ts">
-    let username: string = "";
-    let email: string = "";
-    let password: string = "";
+    export let data;
+    export let form;
 </script>
 
 <title>Signup | Khatzoo!</title>
 
-<form action="" method="get">
-    <input type="text" name="username" placeholder="Username">
-    <input type="email" name="email" placeholder="Email address">
-    <input type="password" name="password" placeholder="Password">
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email address" required>
+    <input type="password" name="password" placeholder="Password" required>
     <input type="submit" value="Sign up" class="submit">
 </form>
 <p>Or log in <a href="/auth/login">here</a></p>
