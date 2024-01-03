@@ -1,23 +1,20 @@
-import { users } from '$lib/dataSource'; // Más adelante se usará una conexión a una base de datos
+import { PrismaClient } from '@prisma/client';
 import { redirect } from '@sveltejs/kit';
 
-export function load({ cookies }) {
-    let username = cookies.get("username");
-    let email = cookies.get("username");
-    let password = cookies.get("username");
+const prisma = new PrismaClient();
 
-    if(username === undefined || email === undefined || password === undefined){
+export async function load({ cookies }) {
+    let username = cookies.get("username");
+
+    if(username === undefined){
         throw redirect(302, '/auth/login');
     }
     else{
-        let verified: boolean = false;
-        for(let u of users){
-            verified = (u.username === username &&
-                        u.email === email &&
-                        u.password === password);
-            if(verified) break;
-        }
-        if(verified) throw redirect(302, '/quizzes');
+        let user = await prisma.user.findUnique({
+            where: {username: username},
+            select: {username: true}
+        })
+        if(user != null) throw redirect(302, '/quizzes');
         else throw redirect(302, '/auth/login');
     }
 }
