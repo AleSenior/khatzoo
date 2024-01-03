@@ -2,7 +2,6 @@
     import RemoveBtn from '$lib/components/removeBtn.svelte'
     import { enhance } from '$app/forms';
     import { fly, slide } from 'svelte/transition';
-    export let data;
     export let form;
 </script>
 

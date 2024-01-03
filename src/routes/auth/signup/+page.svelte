@@ -1,11 +1,18 @@
 <script lang="ts">
-    export let data;
+    import RemoveBtn from '$lib/components/removeBtn.svelte'
+    import { enhance } from '$app/forms';
+    import { fly, slide } from 'svelte/transition';
     export let form;
 </script>
 
 <title>Signup | Khatzoo!</title>
 
-<form method="POST">
+{#if form?.error}
+    <form class="error" in:fly={{y: 50}} out:fly={{y: 50}}>
+        <p>{form.error}  <RemoveBtn /></p>
+    </form>
+{/if}
+<form method="POST" use:enhance>
     <input type="text" name="username" placeholder="Username" required>
     <input type="email" name="email" placeholder="Email address" required>
     <input type="password" name="password" placeholder="Password" required>
@@ -33,5 +40,10 @@
     }
     p {
         margin: 16px 0px 0px 0px;
+    }
+    .error p {
+        margin: 0px;
+        display: flex;
+        align-items: center;
     }
 </style>

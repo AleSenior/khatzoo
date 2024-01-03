@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 export const actions = {
     default: async ({ cookies, request }) => {
         let data = await request.formData();
-        let isRegistered: boolean = false;
         let user = await prisma.user.findUnique({
             where: {username: data.get('username')!.toString()},
             select: {username: true, email: true, password: true}
